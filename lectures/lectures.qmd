@@ -67,7 +67,7 @@ Suggested references:
 
 #### Monday, September 16:
 
-- Lecture 05: Version control with git and GitHub.
+- Lecture 05: [Version control with git and GitHub](https://raw.githack.com/danilofreire/qtm350/main/lectures/lecture-05/05-git-github.html).
 
 Suggested references:
 
