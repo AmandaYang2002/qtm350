@@ -194,7 +194,7 @@ Suggested references:
 
 ### Wednesday, September 18:
 
-- Lecture 06: [More GitHub: pull requests, issues, pages, and collaboration features](https://raw.githack.com/danilofreire/qtm350/main/lectures/lecture-06/06-more-git-github.html).
+- Lecture 06: [More Git and GitHub: pull requests, issues, pages, and collaboration features](https://raw.githack.com/danilofreire/qtm350/main/lectures/lecture-06/06-more-git-github.html).
 - **Assignment 02 due (5%).**
 - **Assignment 03:** Problem Set 03.
 
