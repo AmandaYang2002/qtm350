@@ -90,7 +90,7 @@ Suggested references:
 
 #### Monday, September 23:
 
-- Lecture 07: **Quiz 01: git and Github (6%)**.
+- Lecture 07: [Quiz 01: git and Github (6%)(https://github.com/danilofreire/qtm350-quiz01).
 
 ### Module 03: Literate Programming with Markdown, Quarto, and Jupyter
 
