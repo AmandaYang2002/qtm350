@@ -90,13 +90,13 @@ Suggested references:
 
 #### Monday, September 23:
 
-- Lecture 07: [Quiz 01: git and Github (6%)(https://github.com/danilofreire/qtm350-quiz01).
+- Lecture 07: [Quiz 01: git and Github (6%)](https://github.com/danilofreire/qtm350-quiz01).
 
 ### Module 03: Literate Programming with Markdown, Quarto, and Jupyter
 
 #### Wednesday, September 25:
 
-- Lecture 08: Using Markdown, Jupyter, and Quarto for Reproducible Reports.
+- Lecture 08: [Using Quarto for Reproducible Reports](https://raw.githack.com/danilofreire/qtm350/main/lectures/lecture-08/08-quarto.html)
 - **Assignment 03 due (5%).**
 - **Assignment 04:** Problem Set 04.
 
