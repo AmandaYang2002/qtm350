@@ -1,0 +1,28 @@
+---
+title: "Life Expectancy and Population"
+format: html
+---
+
+
+In this analysis, we explore the relationship between life expectancy and population size using the Gapminder dataset. The graph below shows how life expectancy relates to population over time.
+
+```{python}
+#| echo: true
+#| eval: true
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+gap = pd.read_csv('gapminder.csv')
+
+sns.set(style="whitegrid")
+
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=gap, x='life_expectancy', y='population_millions', hue='year', palette='coolwarm', legend='full')
+
+plt.title("Life Expectancy vs Population Over Time", fontsize=16)
+plt.xlabel("Population (Millions)", fontsize=12)
+plt.ylabel("Life Expectancy", fontsize=12)
+
+plt.show()
+```
