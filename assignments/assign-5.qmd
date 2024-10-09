@@ -1,0 +1,8 @@
+---
+title: "Assignment 5: Analysis of WDI Dataset"
+author: "Amanda Yang"
+date: "2024-10-09"
+format: html
+bibliography: references.bib
+---
+

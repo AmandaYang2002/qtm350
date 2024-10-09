@@ -1,0 +1,29 @@
+---
+title: "My Quarto Document"
+subtitle: "A simple example"
+author: "Amanda Yang"
+date: "2024-09-30"
+---
+
+
+# Introduction
+
+This is a simple Quarto document. This is @fig-sine.
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-cap: "Sine function"
+#| label: fig-sine 
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+
+plt.plot(x, y)
+plt.xlabel("x")
+plt.ylabel("sin(x)")
+plt.title("Figure 01")
+plt.show()
