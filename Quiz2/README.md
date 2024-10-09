@@ -50,7 +50,7 @@ gapminder_df.to_csv('gapminder.csv', index=False)
 
 5. Modify the `index.qmd` file to include a title, a one-line description of the Gapminder dataset, and links to the
 
-6. Create a page entitled `life-gdp.qmd` analysing the relationship between life expectancy and GDP per capita. Give it a title, a brief introduction, and a graph. Show your code. Also give it a link in the index page with the text "Life Expectancy and GDP per Capita".
+6. Create a page entitled `life-gdp.qmd` analysing the relationship between life ebrewxpectancy and GDP per capita. Give it a title, a brief introduction, and a graph. Show your code. Also give it a link in the index page with the text "Life Expectancy and GDP per Capita".
 
 7. Create a page entitled `life-population.qmd` analysing the relationship between life expectancy and population. Do the same as in the previous task, but change the title and the link text to "Life Expectancy and Population".
 
