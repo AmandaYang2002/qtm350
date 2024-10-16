@@ -24,7 +24,7 @@ The wdi.csv dataset was sourced from the World Development Indicators dataset. M
 df[['gdp_per_capita', 'life_expectancy', 'unemployment_rate']].describe()
 ```
 
-Table @tbl:tab-summary-statistics summarizes the key statistics for GDP per capita, life expectancy, and unemployment rate.
+Table @tab-summary-statistics summarizes the key statistics for GDP per capita, life expectancy, and unemployment rate.
 
 The summary statistics of GDP per capita, life expectancy, and unemployment rate highlight significant disparities across countries. The GDP per capita has a wide range, from $259 to over $240,000, with an average of $20,345 and a high standard deviation of $31,309, indicating large economic inequality between countries. The 75th percentile is $25,982, showing that only 25% of countries have higher economic output per person.
 
