@@ -11,7 +11,7 @@ format:
   clean-revealjs:
     self-contained: true
     code-overflow: wrap
-    footer: "[Tables and Dates](https://raw.githack.com/danilofreire/qtm350/main/lectures/lecture-19/10-sql-tables.html)"
+    footer: "[SQL Joins](https://raw.githack.com/danilofreire/qtm350/main/lectures/lecture-19/10-sql-tables.html)"
 transition: slide
 transition-speed: default
 scrollable: true
@@ -97,12 +97,14 @@ editor:
 :::
 :::
 
-## Load the libraries and connect to the database
+## Load the libraries and connect to the database {#sec:tables}
 
 :::{style="margin-top: 50px; font-size: 20px;"}
 - Let's load the libraries and connect to the database
 
 ```{python}
+#| echo: true
+#| eval: true
 import pandas as pd
 import psycopg2
 from sqlalchemy import create_engine, text
@@ -143,6 +145,7 @@ connection.commit()
 
 :::{style="margin-top: 50px; font-size: 20px;"}
 - Now let's insert some data into the tables
+- Problems with the code below? [Try to clean the database first (see how in this appendix)](#sec:appendix05), then create the connection and tables again
 
 ```{python}
 #| echo: true
@@ -173,7 +176,7 @@ connection.commit()
 ## Visualise the tables
 
 :::{style="margin-top: 50px; font-size: 20px;"}
-- Now let's see the data in the tables
+- Let's see our tables
 
 ```{python}
 #| echo: true
@@ -398,8 +401,6 @@ ORDER BY colors.color_name, sizes.size_code DESC;
 - For instance, if you have a table of `people`, each row could contain a `mother` column that reference other people in the table with the same `person_id`
 - A self join would allow you to stitch these different rows together by joining a second instance of the table to the first where these values match
 
-<br>
-
 - Since self joins reference the same table twice, [table aliases are required]{.alert} to disambiguate the references 
 - You could join the two instances of the `people` table using the aliases `people AS children` and `people AS mothers`
 - That way, you can specify which instance of the table you are referring to when defining join conditions
@@ -467,7 +468,7 @@ ORDER BY difference DESC;
 
 ## Try it yourself! 🧠 {#sec:exercise02}
 
-:::{style="margin-top: 50px; font-size: 28px;"}
+:::{style="margin-top: 50px; font-size: 24px;"}
 - Write a SQL query that:
   - Uses a self join on the players table to compare players' `victories`
 - Shows for each pair of players:
@@ -652,16 +653,16 @@ pd.read_sql('SELECT * FROM teams', connection)
 ```
 :::
 
-
-
-
-
 # Conclusion 📖 {background-color="#2d4563"}
 
 ## Conclusion
 
 :::{style="margin-top: 50px; font-size: 20px;"}
 - Today we learned about different types of joins in SQL
+- We also learned about special joins, such as `CROSS JOIN` and `SELF JOIN`
+- We saw how to merge tables by row with `UNION`, `INTERSECT`, and `EXCEPT`
+- We also learned about join conditions with `ON`, `USING`, and `NATURAL JOIN`
+- And we saw the new `MERGE` operator in PostgreSQL 15+ 🚀
 :::
 
 # And that's all for today! 🎉 {background-color="#2d4563"}
@@ -718,3 +719,68 @@ ORDER BY p1.player_id;
 ```
 [[Back to exercise]{.button}](#sec:exercise02)
 ::: 
+
+
+## Appendix 05 {#sec:appendix05}
+### Cleaning all tables
+
+:::{style="margin-top: 50px; font-size: 22px;"}
+- I have encountered some issues with `psycopg2` when trying to drop tables
+- So I created a function to clean all tables in the database
+- If you have a similar issue, you can use the function below
+- Replace the default values with your database name, user, and password
+
+```{python}
+#| echo: true
+#| eval: false
+from sqlalchemy import create_engine, text, inspect
+import time
+
+engine = create_engine('postgresql+psycopg2://postgres:postgres@localhost:5432/postgres', future=True)
+connection = engine.connect()
+
+def clean_database(engine):
+    with engine.connect() as conn:
+        try:
+            # Get inspector to check existing tables
+            inspector = inspect(engine)
+            existing_tables = inspector.get_table_names()
+            
+            if not existing_tables:
+                print("No tables found in database")
+                return
+                
+            print(f"Found {len(existing_tables)} tables: {existing_tables}")
+            
+            # Kill other connections
+            conn.execute(text("""
+                SELECT pg_terminate_backend(pid) 
+                FROM pg_stat_activity 
+                WHERE pid <> pg_backend_pid()
+                AND datname = current_database()
+            """))
+            
+            conn.execute(text("ROLLBACK"))
+            conn.execute(text("SET statement_timeout = '30s'"))
+            
+            # Only drop tables that exist
+            for table in existing_tables:
+                try:
+                    conn.execute(text(f"DROP TABLE IF EXISTS {table} CASCADE"))
+                    print(f"Dropped {table}")
+                    conn.commit()
+                    time.sleep(1)
+                except Exception as e:
+                    print(f"Error with {table}: {str(e)}")
+                    conn.execute(text("ROLLBACK"))
+                    
+        except Exception as e:
+            print(f"Fatal error: {str(e)}")
+            conn.execute(text("ROLLBACK"))
+
+# Execute
+clean_database(engine)
+```
+
+[[Back to the lecture]{.button}](#sec:tables)
+:::
